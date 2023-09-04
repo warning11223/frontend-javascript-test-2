@@ -1,0 +1,48 @@
+.book {
+  width: 250px;
+  height: 400px;
+  background-color: gray;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all .2s linear;
+  text-decoration: none;
+  color: #dddddd;
+
+  &:hover {
+    scale: 1.02;
+  }
+
+  &__img {
+    width: 229px;
+    height: 250px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    margin: 5px;
+    margin-bottom: 10px;
+  }
+
+  &__category {
+    text-align: left;
+    margin-bottom: 10px;
+    background: #494949;
+    border-radius: 5px;
+    padding: 2px 5px;
+    max-width: max-content;
+    font-size: 13px;
+  }
+
+  &__name {
+    color: #282c34;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+  &__authors {
+    color: #dedede;
+    text-align: left;
+    font-size: 13px;
+  }
+}

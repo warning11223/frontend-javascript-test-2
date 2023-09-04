@@ -1,0 +1,48 @@
+.books {
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 100px;
+  }
+
+  &__amount {
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 50px;
+    padding-top: 20px;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 30px;
+    row-gap: 30px;
+  }
+
+  &__btn {
+    background: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #282c34;
+    color: #282c34;
+    padding: 10px;
+    margin-bottom: 30px;
+    text-decoration: none;
+    transition: all .2s linear;
+
+    &:hover {
+      background: #282c34;
+      color: #ffffff;
+    }
+
+    &__wrapper {
+      max-width: 1200px;
+      text-align: center;
+      padding-top: 50px;
+    }
+  }
+}

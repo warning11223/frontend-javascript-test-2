@@ -1,0 +1,120 @@
+.current {
+  background-color: rgba(93, 93, 93, 0.4);
+
+
+
+  &__btn {
+    background: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #282c34;
+    color: #282c34;
+    padding: 10px;
+    margin-bottom: 30px;
+    text-decoration: none;
+    transition: all .2s linear;
+
+    &:hover {
+      background: #282c34;
+      color: #ffffff;
+    }
+
+    &__wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+  }
+
+  &__wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding-top: 50px;
+  }
+
+  &__left {
+    width: 402px;
+    height: 460px;
+  }
+
+  &__img {
+    width: 350px;
+    height: 500px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  }
+
+  &__right {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 20px;
+    width: 402px;
+    height: 460px;
+  }
+
+  &__categories {
+    color: #494949;
+    margin-bottom: 20px;
+  }
+
+  &__name {
+    color: #282c34;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  &__authors {
+    color: #ffffff;
+    background-color: #494949;
+    max-width: max-content;
+    padding: 2px 5px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
+  &__desc__wrapper {
+    height: 300px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    overflow-y: scroll;
+  }
+
+  /* Стили для скролла внутри элемента .__desc__wrapper */
+  &__desc__wrapper::-webkit-scrollbar {
+    width: 8px; /* Ширина скроллбара */
+  }
+
+  &__desc__wrapper::-webkit-scrollbar-thumb {
+    background-color: #8c8c8c; /* Цвет ползунка скроллбара */
+    border-radius: 4px; /* Закругление углов ползунка */
+  }
+
+  &__desc__wrapper::-webkit-scrollbar-thumb:hover {
+    background-color: #757575; /* Цвет ползунка при наведении */
+  }
+
+  &__desc__wrapper::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Цвет фона скроллбара */
+    border-radius: 5px; /* Закругление углов фона */
+  }
+
+  &__desc__wrapper::-webkit-scrollbar-track:hover {
+    background-color: #ddd; /* Цвет фона скроллбара при наведении */
+  }
+
+
+  &__desc {
+    color: #282c34;
+  }
+}
+

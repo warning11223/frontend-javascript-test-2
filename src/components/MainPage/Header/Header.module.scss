@@ -1,0 +1,53 @@
+.header {
+  width: 100%;
+  height: 300px;
+  background: url("../../../img/header-bg.jpg");
+  background-size: cover;
+  background-position: top;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  &__title {
+    padding-top: 20px;
+    font-size: 40px;
+    color: #ffffff;
+    margin-bottom: 30px;
+  }
+
+  &__input {
+    padding: 5px;
+    outline: none;
+    width: 300px;
+    font-size: 20px;
+    border: 1px solid transparent;
+    transition: all .2s linear;
+
+    &:focus {
+      border: 1px solid black;
+    }
+  }
+
+  &__selects {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding-top: 20px;
+  }
+
+  &__select {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+}
