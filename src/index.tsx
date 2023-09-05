@@ -4,7 +4,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MainPage } from "./components/MainPage";
-import { CurrentBookPage } from "./components/MainPage/CurrentBookPage";
+import { CurrentBookPage } from "./components/CurrentBookPage";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 

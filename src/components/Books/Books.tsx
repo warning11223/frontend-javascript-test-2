@@ -2,7 +2,7 @@ import React from "react";
 
 import s from "./Books.module.scss";
 import { Book } from "./Book";
-import { BookItem } from "../../../redux/services/books";
+import { BookItem } from "../../redux/services/books";
 
 type Props = {
   items: BookItem[];
@@ -15,8 +15,8 @@ export const Books: React.FC<Props> = ({
   foundResults,
   onLoadBooks,
 }) => {
-  const renderBooks = items?.map((item) => {
-    return <Book key={item.id} book={item} />;
+  const renderBooks = items?.map((item, index) => {
+    return <Book key={index} book={item} />;
   });
 
   return (

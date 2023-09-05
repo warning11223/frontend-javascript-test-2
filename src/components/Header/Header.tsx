@@ -1,6 +1,7 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from "react";
+import React, { KeyboardEvent, useEffect, useState } from "react";
 
 import s from "./Header.module.scss";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type Props = {
   setSearchValue?: (value: string) => void;
@@ -8,6 +9,7 @@ type Props = {
   setSortBy?: (value: string) => void;
   category?: string;
   setCategory?: (value: string) => void;
+  setStartIndex?: (value: number) => void;
 };
 
 export const Header: React.FC<Props> = ({
@@ -16,12 +18,27 @@ export const Header: React.FC<Props> = ({
   setSortBy,
   setCategory,
   category,
+  setStartIndex,
 }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [inputValue, setInputValue] = useState("");
+
+  useEffect(() => {
+    if (localStorage.getItem("searchValue")) {
+      setInputValue(localStorage.getItem("searchValue")!);
+    }
+  }, []);
 
   const onSearchHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
+      setStartIndex?.(0);
       setSearchValue?.(inputValue);
+      localStorage.setItem("searchValue", inputValue);
+      if (location.pathname !== "/") {
+        setStartIndex?.(0);
+        navigate("/");
+      }
     }
   };
 
@@ -40,13 +57,14 @@ export const Header: React.FC<Props> = ({
           />
           <div className={s.header__selects}>
             <div className={s.header__select}>
-              <label>Categories</label>
+              <label className={s.header__label}>Categories</label>
               <select
                 name="category"
                 value={category}
                 onChange={(e) => setCategory?.(e.currentTarget.value)}
               >
                 <option value="all">all</option>
+                <option value="art">art</option>
                 <option value="biography">biography</option>
                 <option value="computers">computers</option>
                 <option value="history">history</option>
@@ -55,7 +73,7 @@ export const Header: React.FC<Props> = ({
               </select>
             </div>
             <div className={s.header__select}>
-              <label>Sorting by</label>
+              <label className={s.header__label}>Sorting by</label>
               <select
                 name="sorting"
                 value={sortBy}

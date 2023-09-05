@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { BaseQueryArg } from "@reduxjs/toolkit/dist/query/baseQueryTypes";
 
 const googleKey = "AIzaSyBHaqRmLB8-IQh8QNy9kYJN617vYMc2N60";
 
@@ -70,6 +69,7 @@ export type CurrentBookType = {
     pageCount: number;
     publishedDate: string;
     title: string;
+    previewLink: string;
   };
 };
 

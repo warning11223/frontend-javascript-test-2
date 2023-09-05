@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Header } from "./Header";
-import { Books } from "./Books";
+import { Header } from "../Header";
+import { Books } from "../Books";
 import { useLazyGetBooksQuery } from "../../redux/services";
 import { Loader } from "../Loader";
 import { BookItem } from "../../redux/services/books";
@@ -17,8 +17,14 @@ export const MainPage = () => {
   const [getBooks, { data, isLoading, status }] = useLazyGetBooksQuery();
 
   useEffect(() => {
+    if (localStorage.getItem("searchValue")) {
+      setSearchValue(localStorage.getItem("searchValue")!);
+    }
+  }, []);
+
+  useEffect(() => {
     if (searchValue) {
-      getBooks({ name: searchValue })
+      getBooks({ name: searchValue, orderBy: sortBy, category, startIndex })
         .unwrap()
         .then((res) => {
           setBooks(res.items);
@@ -28,7 +34,7 @@ export const MainPage = () => {
 
   useEffect(() => {
     if (searchValue) {
-      getBooks({ name: searchValue, startIndex })
+      getBooks({ name: searchValue, startIndex, orderBy: sortBy, category })
         .unwrap()
         .then((res) => {
           setBooks((prevBooks) => [...prevBooks, ...res.items]);
@@ -38,7 +44,7 @@ export const MainPage = () => {
 
   useEffect(() => {
     if (searchValue) {
-      getBooks({ name: searchValue, orderBy: sortBy })
+      getBooks({ name: searchValue, orderBy: sortBy, startIndex, category })
         .unwrap()
         .then((res) => {
           setBooks(res.items);
@@ -48,7 +54,7 @@ export const MainPage = () => {
 
   useEffect(() => {
     if (searchValue) {
-      getBooks({ name: searchValue, category })
+      getBooks({ name: searchValue, category, orderBy: sortBy, startIndex })
         .unwrap()
         .then((res) => {
           setBooks(res.items);
@@ -57,7 +63,7 @@ export const MainPage = () => {
   }, [category]);
 
   const onLoadBooks = () => {
-    setStartIndex((startIndex) => startIndex + books?.length);
+    setStartIndex((startIndex) => startIndex + 30);
   };
 
   return (
@@ -68,6 +74,7 @@ export const MainPage = () => {
         setSortBy={setSortBy}
         category={category}
         setCategory={setCategory}
+        setStartIndex={setStartIndex}
       />
       {books?.length > 0 ? (
         <Books
