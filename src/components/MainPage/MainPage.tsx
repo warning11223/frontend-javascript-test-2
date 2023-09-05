@@ -31,7 +31,7 @@ export const MainPage = () => {
       getBooks({ name: searchValue, startIndex })
         .unwrap()
         .then((res) => {
-          setBooks([...books, ...res.items]);
+          setBooks((prevBooks) => [...prevBooks, ...res.items]);
         });
     }
   }, [startIndex]);
@@ -46,8 +46,18 @@ export const MainPage = () => {
     }
   }, [sortBy]);
 
+  useEffect(() => {
+    if (searchValue) {
+      getBooks({ name: searchValue, category })
+        .unwrap()
+        .then((res) => {
+          setBooks(res.items);
+        });
+    }
+  }, [category]);
+
   const onLoadBooks = () => {
-    setStartIndex((startIndex) => startIndex + 29);
+    setStartIndex((startIndex) => startIndex + books?.length);
   };
 
   return (
@@ -59,7 +69,7 @@ export const MainPage = () => {
         category={category}
         setCategory={setCategory}
       />
-      {books.length > 0 ? (
+      {books?.length > 0 ? (
         <Books
           items={books}
           foundResults={data?.totalItems}

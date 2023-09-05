@@ -1,32 +1,54 @@
 import React from "react";
 
 import s from "./CurrentBook.module.scss";
-import book from "../../../../img/book.jpg";
+import bookPng from "../../../../img/book.jpg";
 import { Link } from "react-router-dom";
+import { CurrentBookType } from "../../../../redux/services/books";
 
-export const CurrentBook = () => {
+type Props = {
+  book: CurrentBookType | undefined;
+};
+
+export const CurrentBook: React.FC<Props> = ({ book }) => {
+  const categories = book?.volumeInfo.categories.map((item, index) => {
+    return (
+      <p key={index} className={s.current__categories}>
+        {item}
+      </p>
+    );
+  });
+
+  const categoryStrings = categories?.map(
+    (category) => category.props.children,
+  );
+
+  const combinedCategories = categoryStrings?.join(" ");
+
+  const authors = book?.volumeInfo.authors.map((item, index) => {
+    return (
+      <p key={index} className={s.current__authors}>
+        {item}
+      </p>
+    );
+  });
+
   return (
     <div className={s.current}>
       <div className={s.current__wrapper}>
         <div className={s.current__left}>
-          <img src={book} alt="book" className={s.current__img} />
+          <img
+            src={book?.volumeInfo.imageLinks.thumbnail}
+            alt="bookPng"
+            className={s.current__img}
+          />
         </div>
         <div className={s.current__right}>
-          <p className={s.current__categories}>Art/General</p>
-          <p className={s.current__name}>J.S Bacg asjfasdfasdkfjska</p>
-          <p className={s.current__authors}>J.S Bacg DSSDd DSDDS</p>
+          <p className={s.current__categories}>{combinedCategories}</p>
+
+          <p className={s.current__name}>{book?.volumeInfo.title}</p>
+          <div className={s.current__authors__wrapper}>{authors}</div>
           <div className={s.current__desc__wrapper}>
-            <p className={s.current__desc}>
-              J.S Bacg DSSDd DSDDS fsad fasd fasfdasfsad fsadfa J.S Bacg DSSDd
-              DSDDS fsad fasd fasfdasfsad fsadfaJ.S Bacg DSSDd DSDDS fsad fasd
-              fasfdasfsad fsadfaJ.S Bacg DSSDd DSDDS fsad fasd fasfdasfsad
-              fsadfaJ.S Bacg DSSDd DSDDS fsad fasd fasfdasfsad fsadfaJ.S Bacg
-              DSSDd DSDDS fsad fasd fasfdasfsad fsadfaJ.S Bacg DSSDd DSDDS fsad
-              fasd fasfdasfsad fsadfaJ.S Bacg DSSDd DSDDS fsad fasd fasfdasfsad
-              fsadfaJ.S Bacg DSSDd DSDDS fsad fasd fasfdasfsad fsadfaJ.S Bacg
-              DSSDd DSDDS fsad fasd fasfdasfsad fsadfaJ.S Bacg DSSDd DSDDS fsad
-              fasd fasDDS fsad fasd fasfdasfsad fsadfaJ.S Bacg DSSDd DSDDS fsad
-            </p>
+            <p className={s.current__desc}>{book?.volumeInfo.description}</p>
           </div>
         </div>
       </div>

@@ -22,7 +22,6 @@ export const Header: React.FC<Props> = ({
   const onSearchHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       setSearchValue?.(inputValue);
-      setInputValue("");
     }
   };
 
@@ -41,13 +40,13 @@ export const Header: React.FC<Props> = ({
           />
           <div className={s.header__selects}>
             <div className={s.header__select}>
-              <label htmlFor="category">Categories</label>
+              <label>Categories</label>
               <select
                 name="category"
                 value={category}
                 onChange={(e) => setCategory?.(e.currentTarget.value)}
               >
-                <option value="art">all</option>
+                <option value="all">all</option>
                 <option value="biography">biography</option>
                 <option value="computers">computers</option>
                 <option value="history">history</option>
@@ -56,7 +55,7 @@ export const Header: React.FC<Props> = ({
               </select>
             </div>
             <div className={s.header__select}>
-              <label htmlFor="sorting">Sorting by</label>
+              <label>Sorting by</label>
               <select
                 name="sorting"
                 value={sortBy}

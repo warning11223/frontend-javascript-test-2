@@ -45,4 +45,11 @@
     text-align: left;
     font-size: 13px;
   }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 130px;
+  }
 }

@@ -20,7 +20,7 @@ export const Book: React.FC<Props> = ({ book }) => {
   });*/
 
   function bookTitle(title: string) {
-    const maxLength = 40;
+    const maxLength = 50;
 
     if (title.length > maxLength) {
       const truncatedTitle = title.substring(0, maxLength) + "...";
@@ -31,7 +31,7 @@ export const Book: React.FC<Props> = ({ book }) => {
   }
 
   return (
-    <Link to={"/1"} className={s.book}>
+    <Link to={`/${book.id}`} className={s.book}>
       <img
         src={`${
           book.volumeInfo.imageLinks?.smallThumbnail ??
@@ -40,11 +40,15 @@ export const Book: React.FC<Props> = ({ book }) => {
         alt="book"
         className={s.book__img}
       />
-      {book?.volumeInfo?.categories?.[0] && (
-        <p className={s.book__category}>{book?.volumeInfo?.categories?.[0]}</p>
-      )}
-      {bookTitle(book.volumeInfo?.title)}
-      <p className={s.book__authors}>{authors}</p>
+      <div className={s.book__wrapper}>
+        {book?.volumeInfo?.categories?.[0] && (
+          <p className={s.book__category}>
+            {book?.volumeInfo?.categories?.[0]}
+          </p>
+        )}
+        {bookTitle(book.volumeInfo?.title)}
+        <p className={s.book__authors}>{authors}</p>
+      </div>
     </Link>
   );
 };
