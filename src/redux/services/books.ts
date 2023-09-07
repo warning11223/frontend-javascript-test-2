@@ -1,11 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const googleKey = "AIzaSyBHaqRmLB8-IQh8QNy9kYJN617vYMc2N60";
+const baseUrl = "https://www.googleapis.com/books/v1/";
 
 export const booksApi = createApi({
   reducerPath: "booksApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://www.googleapis.com/books/v1/",
+    baseUrl,
   }),
   endpoints: (builder) => ({
     getBooks: builder.query<

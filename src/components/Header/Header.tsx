@@ -1,7 +1,7 @@
 import React, { KeyboardEvent, useEffect, useState } from "react";
-
 import s from "./Header.module.scss";
 import { useLocation, useNavigate } from "react-router-dom";
+import { HeaderSelects } from "./HeaderSelects/HeaderSelects";
 
 type Props = {
   setSearchValue?: (value: string) => void;
@@ -25,20 +25,24 @@ export const Header: React.FC<Props> = ({
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
-    if (localStorage.getItem("searchValue")) {
-      setInputValue(localStorage.getItem("searchValue")!);
+    const searchValue = localStorage.getItem("searchValue");
+    if (searchValue) {
+      setInputValue(searchValue);
     }
-  }, []);
+  }, [setInputValue]);
+
+  const handleSearch = () => {
+    setStartIndex?.(0);
+    setSearchValue?.(inputValue);
+    localStorage.setItem("searchValue", inputValue);
+    if (location.pathname !== "/") {
+      navigate("/");
+    }
+  };
 
   const onSearchHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      setStartIndex?.(0);
-      setSearchValue?.(inputValue);
-      localStorage.setItem("searchValue", inputValue);
-      if (location.pathname !== "/") {
-        setStartIndex?.(0);
-        navigate("/");
-      }
+      handleSearch();
     }
   };
 
@@ -55,35 +59,12 @@ export const Header: React.FC<Props> = ({
             onChange={(e) => setInputValue(e.currentTarget.value)}
             onKeyDown={onSearchHandler}
           />
-          <div className={s.header__selects}>
-            <div className={s.header__select}>
-              <label className={s.header__label}>Categories</label>
-              <select
-                name="category"
-                value={category}
-                onChange={(e) => setCategory?.(e.currentTarget.value)}
-              >
-                <option value="all">all</option>
-                <option value="art">art</option>
-                <option value="biography">biography</option>
-                <option value="computers">computers</option>
-                <option value="history">history</option>
-                <option value="medical">medical</option>
-                <option value="poetry">poetry</option>
-              </select>
-            </div>
-            <div className={s.header__select}>
-              <label className={s.header__label}>Sorting by</label>
-              <select
-                name="sorting"
-                value={sortBy}
-                onChange={(e) => setSortBy?.(e.currentTarget.value)}
-              >
-                <option value="relevance">relevance</option>
-                <option value="newest">newest</option>
-              </select>
-            </div>
-          </div>
+          <HeaderSelects
+            category={category}
+            setCategory={setCategory}
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+          />
         </div>
       </div>
     </header>

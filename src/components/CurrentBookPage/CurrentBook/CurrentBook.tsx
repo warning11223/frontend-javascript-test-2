@@ -46,12 +46,11 @@ export const CurrentBook: React.FC<Props> = ({ book }) => {
         </div>
         <div className={s.current__right}>
           <p className={s.current__categories}>{combinedCategories}</p>
-
           <p className={s.current__name}>{book?.volumeInfo?.title}</p>
           <div className={s.current__authors__wrapper}>{authors}</div>
           <div className={s.current__desc__wrapper}>
             <p className={s.current__desc}>
-              {book?.volumeInfo.description ?? "No description"}
+              {book?.volumeInfo?.description ?? "No description"}
             </p>
           </div>
           <div className={s.current__info}>

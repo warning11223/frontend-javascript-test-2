@@ -15,9 +15,10 @@ export const Books: React.FC<Props> = ({
   foundResults,
   onLoadBooks,
 }) => {
-  const renderBooks = items?.map((item, index) => {
-    return <Book key={index} book={item} />;
-  });
+  const renderBooks =
+    items?.map((item, index) => {
+      return <Book key={index} book={item} />;
+    }) || [];
 
   return (
     <div className={s.books__container}>

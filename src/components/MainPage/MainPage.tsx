@@ -6,6 +6,7 @@ import { Loader } from "../Loader";
 import { BookItem } from "../../redux/services/books";
 
 import s from "./MainPage.module.scss";
+import { toast } from "react-toastify";
 
 export const MainPage = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -23,44 +24,35 @@ export const MainPage = () => {
   }, []);
 
   useEffect(() => {
+    fetchBooks(searchValue, false);
+  }, [searchValue]);
+
+  useEffect(() => {
+    fetchBooks(searchValue, true);
+  }, [startIndex]);
+
+  useEffect(() => {
+    fetchBooks(searchValue, false);
+  }, [sortBy]);
+
+  useEffect(() => {
+    fetchBooks(searchValue, false);
+  }, [category]);
+
+  const fetchBooks = (searchValue: string, saveBooks: boolean) => {
     if (searchValue) {
       getBooks({ name: searchValue, orderBy: sortBy, category, startIndex })
         .unwrap()
         .then((res) => {
-          setBooks(res.items);
-        });
+          if (saveBooks) {
+            setBooks((prevBooks) => [...prevBooks, ...res.items]);
+          } else {
+            setBooks(res.items);
+          }
+        })
+        .catch((err) => toast.error(err.error));
     }
-  }, [searchValue]);
-
-  useEffect(() => {
-    if (searchValue) {
-      getBooks({ name: searchValue, startIndex, orderBy: sortBy, category })
-        .unwrap()
-        .then((res) => {
-          setBooks((prevBooks) => [...prevBooks, ...res.items]);
-        });
-    }
-  }, [startIndex]);
-
-  useEffect(() => {
-    if (searchValue) {
-      getBooks({ name: searchValue, orderBy: sortBy, startIndex, category })
-        .unwrap()
-        .then((res) => {
-          setBooks(res.items);
-        });
-    }
-  }, [sortBy]);
-
-  useEffect(() => {
-    if (searchValue) {
-      getBooks({ name: searchValue, category, orderBy: sortBy, startIndex })
-        .unwrap()
-        .then((res) => {
-          setBooks(res.items);
-        });
-    }
-  }, [category]);
+  };
 
   const onLoadBooks = () => {
     setStartIndex((startIndex) => startIndex + 30);

@@ -1,1 +1,1 @@
-export { useLazyGetBooksQuery } from "./books";
+export { useLazyGetBooksQuery, useGetCurrentBookQuery } from "./books";
